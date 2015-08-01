@@ -33,15 +33,14 @@ void wtrim(char s[], int i) {
     if(i > 0 && s[i-1] != '\n')
         return;    /* Exit if no whitespace to trim */
 
-    i -= 2;        /* Move prior to terminal \n */
+    s[--i] = '\0';
+    --i;           /* Move prior to terminal \n */
 
     while(i>=0 && ((c=s[i])=='\t' || c==' ')) {
-        s[i+1] = '\0';
+        s[i] = '\0';
         --i;
     }
-    if(i == -1)
-        s[0] = '\0';
-    else
+    if(i > -1)
         s[i+1] = '\n';
 }
 
