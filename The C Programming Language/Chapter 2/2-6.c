@@ -8,6 +8,7 @@
  */
 
 #include <stdio.h>
+#include <math.h>
 
 unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y);
 
@@ -15,7 +16,7 @@ unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y);
 unsigned setbits(unsigned x, unsigned p, unsigned n, unsigned y)
 {
     unsigned shift = p+1-n;  /* Amount to bitshift masks based on size of n vs position p */
-    unsigned mask_bits = 2*n-1;
+    unsigned mask_bits = (unsigned)powf(2,n)-1;
     unsigned xmask = mask_bits << shift;  /* 1 from n to n+p, 0 otherwise */
     unsigned ymask = mask_bits;
     return (x&~xmask) | (ymask & y) << shift;
@@ -29,7 +30,7 @@ int main()
     y = 12;     /* 00001100 */
 
     unsigned p, n;
-    p = 3;
+    p = 5;
     n = 4;
 
     printf("%u\n", setbits(x, p, n, y));
