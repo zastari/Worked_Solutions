@@ -16,13 +16,13 @@ void reverse(char s[]);
 /* Reverse string in place by swapping values that are equidistant from the midpoint */
 void reverse(char s[])
 {
-    const int len = strlen(s) - 1;      /* Omit terminal \0 from length */
+    const int len = strlen(s);
     int i;
     char temp;
-    for(i = 0; i <= len/2; i++) {
+    for(i = 0; i < len/2; i++) {
         temp = s[i];
-        s[i] = s[len-i];
-        s[len-i] = temp;
+        s[i] = s[(len-1)-i];
+        s[(len-1)-i] = temp;
     }
 }
 
