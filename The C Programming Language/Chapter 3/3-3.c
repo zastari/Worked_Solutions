@@ -44,7 +44,7 @@ void expand(char s1[], char s2[])
 
 int main()
 {
-    char s1[] = "-abcA-Zd-o1-8a-Fzyxa-aF-aF-A8-3-";
+    char s1[] = "-abca-b-a-f-bA-Zd-o1-8a-Fzyxa-aF-aF-A8-3-";
     char s2[26*(sizeof(s1)/sizeof(char))/3]; /* Worst case: every block of 3 chars expands into 26 outputs */
 
     expand(s1,s2);
