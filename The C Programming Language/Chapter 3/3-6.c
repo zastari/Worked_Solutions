@@ -1,16 +1,11 @@
-/* KR 3-4: In a two's complement number representation, our version of
- * itoa does not handle the largest negative number, that is, the value of n equal
- * to -(2^(wordsize-1)). Explain why not. Modify it to print that value correctly,
- * regardless of the machine on which it runs.
- *
- * Explanation: int has range -x to x-1 where x = 2^31 on modern systems.
- * Generally, -(-y) = y, but since x > x-1, -(-x) overflows, yielding -(-x) = -x
- * on a two's complement system.
+/* KR 3-6: Write a version of itoa that accepts three arguments instead of
+ * two. The third argument is a minimum field width; the converted number must
+ * be padded with blanks on the left if necessary to make it wide enough.
  */
 #include <stdio.h>
 #include <string.h>
 
-void itoa(int n, char s[]);
+void itoa(int n, char s[], int w);
 void reverse(char s[]);
 
 /* Reverse string in place by swapping values that are equidistant from the midpoint */
@@ -26,7 +21,7 @@ void reverse(char s[])
     }
 }
 
-void itoa(int n, char s[]) {
+void itoa(int n, char s[], int w) {
     int i, sign;
 
     sign = (n >= 0) ? 1 : -1;
@@ -36,6 +31,11 @@ void itoa(int n, char s[]) {
     } while ((n /= 10) != 0);
     if (sign < 0)
         s[i++] = '-';
+
+    while(i < w) {
+        s[i++] = ' ';
+    }
+
     s[i] = '\0';
     reverse(s);
 }
@@ -44,8 +44,8 @@ void itoa(int n, char s[]) {
 int main()
 {
     int n = -2147483648;
-    char s[12];     /* Hold any int +1 character to make bounds checking easier */
-    itoa(n, s);
+    char s[20];     /* Hold any int +1 character to make bounds checking easier */
+    itoa(n, s, 18);
     printf("%s\n", s);
     return 0;
 }
