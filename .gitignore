@@ -1,2 +1,7 @@
 *.o
 a.out
+*.pyc
+*.idea
+*.iml
+*.swp
+.git_crypt
