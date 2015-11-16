@@ -10,7 +10,7 @@ int main()
     int type;
     double op, op2;
     char s[MAXOP];
-    int vars[26];
+    double vars[26];
 
     while((type = getop(s)) != EOF) {
         switch(type) {
@@ -74,7 +74,8 @@ int main()
                 clear();
                 break;
             case '\n':
-                printf("\t%.8g\n", pop());
+                vars[0] = pop();
+                printf("\t%.8g\n", vars[0]);
                 break;
             default:
                 printf("Unknown command %s\n", s);
