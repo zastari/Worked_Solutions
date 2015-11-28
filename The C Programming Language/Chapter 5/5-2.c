@@ -47,14 +47,14 @@ int getfloat(float *pn)
 
     while(isspace(c = getch()));
 
-    if(c != '+' && c != '-' && c != EOF && !isdigit(c)) {
+    if(c != '+' && c != '-' && c != '.' && c != EOF && !isdigit(c)) {
         return 0;
     }
 
     sign = (c == '-') ? -1 : 1;
     if(c == '-' || c == '+') {
         c = getch();
-        if(!isdigit(c)) {
+        if(!isdigit(c) && c != '.') {
             ungetch(c);
             return 0;
         }
