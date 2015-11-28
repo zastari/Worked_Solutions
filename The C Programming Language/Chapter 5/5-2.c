@@ -1,5 +1,11 @@
-/* KR 5-1: As written, getint treats a + or - not followed by a digit as a
- *   valid representation of 0. Fix it to push a character back on the input.
+/* KR 5-2: Write getfloat, the floating point version of getint. What type
+ *   does getfloat return as its value?
+ *
+ *   Answer: int. The return type is only used to indicate what type of
+ *   value was encountered:
+ *     0: non-digit
+ *   EOF: EOF
+ *    ~0: digit
  */
 #include <stdio.h>
 #include <ctype.h>
@@ -8,7 +14,7 @@
 
 int getch(void);
 void ungetch(int);
-int getint(int *);
+int getfloat(float *);
 
 
 static int buf = '\0';
@@ -35,7 +41,7 @@ void ungetch(int c)
 }
 
 
-int getint(int *pn)
+int getfloat(float *pn)
 {
     int c, sign;
 
@@ -57,6 +63,12 @@ int getint(int *pn)
     for(*pn = 0; isdigit(c); c = getch()) {
         *pn = *pn * 10 + c - '0';
     }
+    if(c == '.') {
+        c = getch();
+        for(float decimal = 10.0; isdigit(c); c = getch(), decimal *= 10.0) {
+            *pn = *pn + (c - '0') / decimal;
+        }
+    }
     *pn *= sign;
 
     if(c != EOF) {
@@ -69,17 +81,18 @@ int getint(int *pn)
 
 int main()
 {
-    int n = 0, array[SIZE];
+    int n = 0;
+    float array[SIZE];
     int c;
 
-    while(n < SIZE && (c = getint(&array[n])) != EOF) {
+    while(n < SIZE && (c = getfloat(&array[n])) != EOF) {
         if(c != 0) {
             n++;
         }
     }
 
     for(int i = 0; i < n; i++) {
-        printf("%d ", array[i]);
+        printf("%f ", array[i]);
     }
     printf("\n");
 
