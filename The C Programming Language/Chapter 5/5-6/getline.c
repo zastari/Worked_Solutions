@@ -4,14 +4,15 @@
  */
 #include <stdio.h>
 #define MAXSIZE 1000
-void mygetline(char *s, int lim)
+int mygetline(char *s, int lim)
 {
     int i = 0, c;
-    while((c = getchar()) != EOF && c != '\n' && i++ < lim-1) {
-        *s++ = c;
+    while((c = getchar()) != EOF && c != '\n' && i < lim) {
+        *(s+i++) = c;
     }
     if(c != EOF) {
-        *s++ = c;
+        *(s+i++) = c;
     }
-    *s = '\0';
+    *(s+i) = '\0';
+    return i;
 }
