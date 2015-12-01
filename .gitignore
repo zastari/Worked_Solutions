@@ -5,3 +5,5 @@ a.out
 *.iml
 *.swp
 .git_crypt
+vagrant
+.vagrant
