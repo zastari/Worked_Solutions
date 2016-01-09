@@ -50,19 +50,6 @@ struct tlist {
     struct tlist *right;
 };
 
-/* Regular: Not in any special mode
-      Init: Start of line (a # will be a valid preprocessor directive)
-     Slash: A '/' was found that could lead into a comment
-      Star: A '*' was found that could terminate a block comment
-     Scomm: In a single-line comment "//"
-     Bcomm: In a block comment
-    Squote: In a single-quoted value
-    Dquote: In a double-quoted value
-       Esc: In an escape sequence
-   Preproc: In a preprocessor block
- */
-enum { REGULAR, INIT, SLASH, STAR, SCOMM, BCOMM, SQUOTE, DQUOTE, ESC, PREPROC };
-
 int getword(char *word, int maxlen);
 int binsearch(char *word, char **words, int len);
 struct tref *addref(struct tref *node, char *key, int linenumber);
