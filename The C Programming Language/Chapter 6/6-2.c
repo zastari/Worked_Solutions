@@ -128,22 +128,9 @@ int getword(char *word, int maxlen)
         return EOF;
     }
 
-    /* Ignore tokens like _int or 3int */
-    if(isdigit(c) || c == '_') {
-        while((c = getfchar()) == '_' || isalnum(c));
-        *word = '\0';
-        return 0;
-    }
-
     for(i = 0; isalpha(c) && i < maxlen-1; i++) {
         *(word+i) = c;
         c = getfchar();
-    }
-
-    /* Ignore tokens like int_ or int3 */
-    if(isdigit(c) || c == '_') {
-        *word = '\0';
-        return 0;
     }
 
     *(word+i) = '\0';
