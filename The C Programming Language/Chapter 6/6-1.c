@@ -74,7 +74,7 @@ int main(void)
     char word[MAXWORD];
 
     while(getword(word, MAXWORD) != EOF) {
-        if((n = binsearch(word, keytab, NKEYS)) > 0) {
+        if((n = binsearch(word, keytab, NKEYS)) >= 0) {
             keytab[n].count++;
         }
     }
