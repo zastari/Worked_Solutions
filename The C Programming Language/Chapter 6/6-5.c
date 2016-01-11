@@ -92,7 +92,7 @@ int uninstall(char *name)
 
     temp = pp;
     (*pp) = (*pp)->next;
-    free(temp);
+    free(*temp);
 
     return 0;
 }
@@ -100,5 +100,7 @@ int uninstall(char *name)
 
 int main(void)
 {
+    install("foo", "bar");
+    uninstall("foo");
     return 0;
 }
